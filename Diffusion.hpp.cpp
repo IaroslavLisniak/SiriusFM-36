@@ -13,10 +13,6 @@ namespace SiriusFM
 
 		public:
 
-			DiffusionGBM(double a_mu, double a_sigma)
-			:
-			m_mubar(a_mu),
-			m_sigmabar(a_sigma)
 
 			double mu(double a_St, int a_t) const
 			{
@@ -27,6 +23,10 @@ namespace SiriusFM
 			{
 				return m_sigmabar * a_St;
 			};
+
+			DiffusionGBM(double a_mu, double a_sigma):
+			m_mubar(a_mu),
+			m_sigmabar(a_sigma)
 
 			{
 				if (m_sigmabar <= 0) throw std::invalid_argument('DiffusionCEV: invalid sigma');
@@ -45,12 +45,6 @@ namespace SiriusFM
 
 		public:
 
-			DiffusionCEV(double a_mubar, double a_sigmabar, 
-				double a_beta)
-			:
-			m_mubar(a_mu),
-			m_sigmabar(a_sigma),
-			m_beta(a_beta)
 
 			double mu(double a_St, int a_t) const
 			{
@@ -61,6 +55,11 @@ namespace SiriusFM
 			{
 				return m_sigmabar * pow(a_St, m_beta);
 			};
+
+			DiffusionCEV(double a_mubar, double a_sigmabar, double a_beta):
+			m_mubar(a_mu),
+			m_sigmabar(a_sigma),
+			m_beta(a_beta)
 
 			{
 				if (m_sigmabar < 0) throw std::invalid_argument('DiffusionCEV: invalid sigma');
@@ -78,15 +77,6 @@ namespace SiriusFM
 			double const m_kappa;
 			double const m_theta;
 
-		
-			DiffusionOU(double a_mu, double a_sigma, 
-				double a_kappa, double a_theta)
-			:
-			m_mubar(a_mu),
-			m_sigmabar(a_sigma),
-			m_kappa(a_kappa),
-			m_theta(a_theta)
-
 			double mu(double a_St, int a_t) const
 			{
 				return m_kappa * (m_theta - a_St);
@@ -96,6 +86,13 @@ namespace SiriusFM
 			{
 				return m_sigmabar;
 			};
+
+			DiffusionOU(double a_mu, double a_sigma, double a_kappa, double a_theta):
+			m_mubar(a_mu),
+			m_sigmabar(a_sigma),
+			m_kappa(a_kappa),
+			m_theta(a_theta)
+
 			{
 				if (m_sigmabar < 0) throw std::invalid_argument('DiffusionCEV: invalid sigma');
 				if (m_kappa <= 0) throw std::invalid_argument('DiffusionOU: invalid kappa');
@@ -110,14 +107,6 @@ namespace SiriusFM
 
 		public:
 
-			DiffusionLipton(double a_mu, double a_sigma0, 
-				double a_sigma1, double a_sigma2)
-			:
-			m_mubar(a_mu),
-			m_sigma0(a_sigma0),
-			m_sigma1(a_sigma1),
-			m_sigma2(a_sigma2)
-
 			double mu(double a_St, int a_t) const
 			{
 				return m_mubar * a_St;
@@ -127,6 +116,13 @@ namespace SiriusFM
 			{
 				return (m_sigma0 + m_simga1 * a_St + m_simga2 * pow(a_St, 2));
 			};
+
+			DiffusionLipton(double a_mu, double a_sigma0, double a_sigma1, double a_sigma2):
+			m_mubar(a_mu),
+			m_sigma0(a_sigma0),
+			m_sigma1(a_sigma1),
+			m_sigma2(a_sigma2)
+
 			{
 				if (m_sigmabar < 0) throw std::invalid_argument('DiffusionCEV: invalid sigma');
 				if (m_kappa <= 0) throw std::invalid_argument('DiffusionOU: invalid kappa');
@@ -141,14 +137,6 @@ namespace SiriusFM
 
 		public:
 
-			DiffusionCIR(double a_mu, double a_sigma, 
-				double a_kappa, double a_theta)
-			:
-			m_mubar(a_mu),
-			m_sigmabar(a_sigma),
-			m_kappa(a_kappa),
-			m_theta(a_theta)
-
 			double mu(double a_St, int a_t) const
 			{
 				return m_mubar * a_St; 
@@ -158,6 +146,12 @@ namespace SiriusFM
 			{
 				return m_sigmabar * sqrt(a_St);
 			};
+
+			DiffusionCIR(double a_mu, double a_sigma, double a_kappa, double a_theta):
+			m_mubar(a_mu),
+			m_sigmabar(a_sigma),
+			m_kappa(a_kappa),
+			m_theta(a_theta)
 
 			{
 				if (a_sigma < 0) throw std::invalid_argument("Invalid sigma, DiffusionOU");
