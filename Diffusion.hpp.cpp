@@ -63,7 +63,7 @@ namespace SiriusFM
 
 			double mu(double a_St, int a_t) const
 			{
-				return m_mubar * St; 
+				return m_mubar * a_St; 
 			}
 
 			double sigma(double a_St, int a_t) const
@@ -167,7 +167,7 @@ namespace SiriusFM
 
 			double mu(double a_St, int a_t) const
 			{
-				return m_kappa * (m_theta - a_St); 
+				return m_mubar * a_St; 
 			}
 
 			double sigma(double a_St, int a_t) const
